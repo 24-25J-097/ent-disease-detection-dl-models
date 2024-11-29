@@ -44,7 +44,8 @@ def predict_image(data):
    try:
       # Make the prediction
       prediction = model.predict(data)
-      index = np.argmax(prediction)
+
+      index = np.argmax(prediction) # get the highest probability for classes
       class_name = class_names[index]
       confidence_score = prediction[0][index]
 
