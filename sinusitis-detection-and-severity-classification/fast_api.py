@@ -70,8 +70,12 @@ async def predictAPI(file: UploadFile = File(...)):
 
       # Return the result as JSON
       return {
-         "prediction": class_name.strip(),
-         "confidence_score": float(confidence_score)  
+         "success": True,
+         "message": "success",
+         "data":{
+            "prediction": class_name.strip(),
+            "confidence_score": float(confidence_score)  
+         }
       }
    except Exception as e:
       return {"error": str(e)}
