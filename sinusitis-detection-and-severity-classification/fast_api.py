@@ -7,8 +7,18 @@ import io
 
 app = FastAPI()
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Add the URL of your frontend
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
+
 # Set the correct model path on Google Drive
-model_path = 'sinusities/inceptionv3_model_improved.h5'
+model_path = 'inceptionV3_updated.h5'
 
 # Load the model and labels
 model = load_model(model_path, compile=False)
