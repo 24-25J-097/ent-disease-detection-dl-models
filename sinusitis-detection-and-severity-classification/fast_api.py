@@ -1,3 +1,4 @@
+import cv2
 from fastapi import FastAPI, File, UploadFile
 from tensorflow.keras.models import load_model
 # from keras.models import load_model
@@ -16,16 +17,52 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all HTTP methods
     allow_headers=["*"],  # Allow all headers
 )
+ 
+# Load the trained model
 
-# Set the correct model path on Google Drive
+image_validator_model_path = 'waters_view_validator.h5'
 model_path = 'inceptionV3_updated.h5'
 
-# Load the model and labels
+# Load the model
 model = load_model(model_path, compile=False)
+image_validator_model = load_model(image_validator_model_path, compile=False)
+
+# labels
 class_names = ["mild", "moderate", "severe"]
  
 
 # Function to preprocess the image
+# Function to preprocess an image
+def preprocess_image_for_validate(file_bytes):
+      IMG_HEIGHT, IMG_WIDTH = 224, 224
+      img = Image.open(file_bytes).convert("RGB")
+      img = np.array(img)
+      #  img = cv2.imread(image_path)  # Load image
+      if img is None:
+         raise ValueError(f"Could not read image")
+      img = cv2.resize(img, (IMG_HEIGHT, IMG_WIDTH))  # Resize
+      img = img / 255.0  # Normalize
+      img = np.expand_dims(img, axis=0)  # Add batch dimension
+
+      return img
+
+# Function to classify the image
+def validate_image(file_bytes):
+    try:
+        img = preprocess_image_for_validate(file_bytes)
+        prediction = image_validator_model.predict(img)
+
+        print(f"Prediction: {prediction}")
+
+        probability = prediction[0][0]  # Get the prediction score
+
+        if probability > 0.5:
+            return True,probability
+        else:
+            return False,probability
+    except Exception as e:
+        return f"Error: {e}"
+
 def preprocess_image(file):
    try:
       # Open the image
@@ -72,6 +109,18 @@ async def predictAPI(file: UploadFile = File(...)):
       file = await file.read()
       file_bytes = io.BytesIO(file)
 
+      result,probability = validate_image(file_bytes)
+
+      if result == False:
+         return {
+            "success": True,
+            "message": "Invalid Image",
+            "data":{
+               "prediction": "invalid",
+               "confidence_score": float(probability)  
+            }
+         }
+         
       # Preprocess the image
       data = preprocess_image(file_bytes)
 
