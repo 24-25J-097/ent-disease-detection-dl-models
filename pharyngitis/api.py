@@ -10,7 +10,7 @@ app = FastAPI()
 model_path = 'pharyngitis_model_mobilenetv2.h5'
 
 # Define the API endpoint
-@app.post("/pharyngitis")
+@app.post("/pharyngitis/predict")
 async def predictAPI(file: UploadFile = File(...)):
    try:
       file = await file.read()
@@ -20,7 +20,7 @@ async def predictAPI(file: UploadFile = File(...)):
       model = load_model(model_path, compile=False)
 
       # Define the class names
-      class_names = ["Normal", "Moderate", "Tonsillitis"]
+      class_names = ["normal", "moderate", "tonsillitis"]
 
       # Prepare input image
       data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
@@ -35,10 +35,14 @@ async def predictAPI(file: UploadFile = File(...)):
       index = np.argmax(prediction)
       class_name = class_names[index]
       confidence_score = prediction[0][index]
-
+ 
       return {
-         "prediction": class_name.strip(),
-         "confidence_score": float(confidence_score)  
+         "success": True,
+         "message": "success",
+         "data":{
+            "prediction": class_name.strip(),
+            "confidence_score": float(confidence_score)  
+         }
       }
    except Exception as e:
       return {"error": str(e)}
