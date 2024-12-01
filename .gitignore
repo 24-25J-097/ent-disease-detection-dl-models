@@ -1,0 +1,61 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+.env/
+env/
+.venv/
+
+# Uvicorn log files
+*.log
+
+# TensorFlow, Keras, or other model weights and data
+# *.h5
+# model/
+# saved_models/
+
+# IDE specific files
+.idea/
+.vscode/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# FastAPI auto-generated files
+*.db
+
+# Python packaging files
+*.egg-info/
+dist/
+build/
+
+# Docker files
+Dockerfile
+docker-compose.yml
+
+# Pytest and coverage reports
+.coverage
+*.coveragerc
+nosetests.xml
+coverage.xml
+*.hypothesis/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Other large or unnecessary files
+*.tar.gz
+*.zip
+*.7z
+*.rar
+
+# Additional sensitive files you may not want to commit
+*.env
+
+# Ensure TensorFlow specific files are ignored
+# tensorflow/
+# keras/
