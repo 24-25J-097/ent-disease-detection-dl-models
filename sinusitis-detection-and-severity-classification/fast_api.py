@@ -57,11 +57,11 @@ def validate_image(file_bytes):
         probability = prediction[0][0]  # Get the prediction score
 
         if probability > 0.5:
-            return True,probability
+            return True, probability
         else:
-            return False,probability
+            return False, probability
     except Exception as e:
-        return f"Error: {e}"
+        raise ValueError(f"Error: {e}")
 
 def preprocess_image(file):
    try:
