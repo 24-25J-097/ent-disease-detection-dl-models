@@ -14,21 +14,31 @@ This repository contains an API built using **FastAPI** to classify X-ray images
 
 ## Requirements
 
-- **Python 3.7+**
-- **Required Libraries**:
+- **Python 3.10.2**
+- **Required Libraries**: 
   - `FastAPI`
   - `Uvicorn`
   - `TensorFlow`
+  - `NumPy`
+  - `Python Pillow (Imaging Library)`
+  - `OpenCV`
+  - `Python-Multipart`
 - **Ngrok** (Download from [ngrok.com/download](https://ngrok.com/download)).
 
 Install Python dependencies:
 ```bash
-pip install fastapi uvicorn tensorflow
+pip install tensorflow==2.10.0
+pip install numpy==1.23.0
+pip install fastapi
+pip install uvicorn
+pip install pillow
+pip install opencv-python
+pip install python-multipart
 ```
 ### Steps to Run the Application
 #### Run the FastAPI Application.
 
-To start the FastAPI server, use the following command:
+To start the Sinusitis FastAPI server, use the following command:
 ```bash
 uvicorn fast_api:app --reload --port 4000
 
