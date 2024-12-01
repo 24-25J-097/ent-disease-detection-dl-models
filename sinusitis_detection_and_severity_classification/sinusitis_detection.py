@@ -78,7 +78,7 @@ def predict_image(file_bytes):
       raise ValueError(f"Error during prediction: {e}")
 
 # Main file processing function
-async def process_uploaded_file(file):
+async def process_xray_image(file):
    try:
       file_bytes = io.BytesIO(await file.read())
       valid, probability = validate_image(file_bytes)
