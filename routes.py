@@ -5,15 +5,15 @@ import logging
 router = APIRouter()
 
 # Test route to check server status
-@router.get("/test")
+@router.get("/sinusitis")
 async def testAPI():
     """
-    Test route to check if the API server is running.
+    Test route to check if the Sinusitis API server is running.
     """
-    return {"message": "Server is running and working fine!"}
+    return {"message": "Sinusitis API Server is running and working fine!"}
 
 # Define the API endpoint for predictions
-@router.post("/predict")
+@router.post("/sinusitis/analyze")
 async def predictAPI(file: UploadFile = File(...)):
     """
     Endpoint to upload a file for sinusitis detection and severity classification.

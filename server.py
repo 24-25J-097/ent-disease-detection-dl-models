@@ -27,7 +27,7 @@ async def root():
     return {"message": "Welcome to the Medical Image Analysis API."}
 
 # Include the router with all routes
-app.include_router(router)
+app.include_router(router, prefix="/api")
 
 # Include the specific route from the routes.py file
 # app.include_router(predict.router, prefix="/predict", tags=["predict"])

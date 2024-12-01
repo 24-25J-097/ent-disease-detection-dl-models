@@ -3,9 +3,9 @@
 from .sinusitis_detection import preprocess_image_for_validate, validate_image, preprocess_image, predict_image, process_uploaded_file
 
 __all__ = [
-    "preprocess_image_for_validate",
-    "validate_image",
-    "preprocess_image",
-    "predict_image",
+   #  "preprocess_image_for_validate",
+   #  "validate_image",
+   #  "preprocess_image",
+   #  "predict_image",
     "process_uploaded_file"
 ]
