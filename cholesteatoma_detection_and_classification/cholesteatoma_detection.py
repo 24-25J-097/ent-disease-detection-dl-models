@@ -9,7 +9,7 @@ import logging
 # Get absolute path to model files (dynamically relative to the current file)
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# image_validator_model_path = os.path.join(current_dir, 'cholesteatoma_validator.h5')
+# image_validator_model_path = os.path.join(current_dir, 'ResNet50_endoscopy_image_validator.h5')
 model_path = os.path.join(current_dir, 'inceptionV3.h5')
 
 # Class labels
