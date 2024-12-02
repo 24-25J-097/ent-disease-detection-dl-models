@@ -58,7 +58,10 @@ async def process_oral_image(file):
             "success": True,
             "message": "Invalid Image",
             "data":{
+               "isDiseased": False,
                "prediction": "invalid",
+               "label": "Invalid Oral Image",
+               "suggestions": "Please upload valid Oral Image",
                "confidence_score": float(probability)  
             }
          }
@@ -87,7 +90,10 @@ async def process_oral_image(file):
          "success": True,
          "message": "success",
          "data":{
+            "isDiseased": class_name.strip() != "normal",
             "prediction": class_name.strip(),
+            "label": get_descriptive_title(class_name.strip()),
+            "suggestions": get_suggestions(class_name.strip()),
             "confidence_score": float(confidence_score)  
          }
       }
@@ -97,3 +103,21 @@ async def process_oral_image(file):
          "message": "success",
          "error": str(e)
       }
+
+
+def get_descriptive_title(class_name):
+      class_info = {
+         "healthy": "Healthy (No throat inflammation or symptoms)",
+         "moderate": "Moderate (Inflamed or red throat causing mild discomfort)",
+         "tonsillitis": "Tonsillitis (A severe subtype of pharyngitis with swollen, pus-filled tonsils with white patches and high fever)"
+      } 
+      return class_info.get(class_name, "Invalid class name. Please provide a valid class name.")
+
+def get_suggestions(class_name):
+      suggestions = {
+         "healthy": "No treatment needed. Stay hydrated and maintain oral hygiene.",
+         "moderate": "Try warm gargles or lozenges. See a doctor if it worsens.",
+         "tonsillitis": "Immediate medical care needed. Antibiotics or advanced treatment may be required."
+      }
+
+      return suggestions.get(class_name, "Invalid class name. Please provide a valid class name.")
