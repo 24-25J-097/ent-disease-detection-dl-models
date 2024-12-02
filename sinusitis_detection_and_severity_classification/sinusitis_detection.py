@@ -88,7 +88,10 @@ async def process_xray_image(file):
                "success": True,
                "message": "Invalid Image",
                "data": {
-                  "prediction": "invalid",
+                  "isSinusitis": False,
+                  "prediction": "invalid", 
+                  "label": "Invalid Water's View X Ray",
+                  "suggestions": "Please upload valid Water's View X Ray",
                   "confidence_score": float(probability)
                }
             }
@@ -100,7 +103,10 @@ async def process_xray_image(file):
             "success": True,
             "message": "success",
             "data": {
+               "isSinusitis": class_name.strip() != "mild",
                "prediction": class_name.strip(),
+               "label": get_descriptive_title(class_name.strip()),
+               "suggestions": get_suggestions(class_name.strip()),
                "confidence_score": float(confidence_score)
             }
       }
@@ -111,3 +117,18 @@ async def process_xray_image(file):
          "error": str(e)
       }
 
+def get_descriptive_title(class_name):
+    class_info = {
+        "mild": "Mild (Healthy or Minimal Sinus Congestion)",
+        "moderate": "Moderate (Significant Inflammation in Sinus Cavity)",
+        "severe": "Severe (Advanced Blockage or Potential Complications)"
+    }
+    return class_info.get(class_name, "Invalid class name. Please provide a valid class name.")
+
+def get_suggestions(class_name):
+    suggestions = {
+        "mild": "No treatment necessary. Maintain hydration, use saline sprays, and monitor symptoms if present.",
+        "moderate": "Consider consulting a healthcare provider. Use nasal decongestants or antihistamines as recommended.",
+        "severe": "Urgent medical evaluation required. Imaging studies (e.g., CT scan) may be necessary for treatment planning."
+    }
+    return suggestions.get(class_name, "Invalid class name. Please provide a valid class name.")
