@@ -6,6 +6,9 @@ The application is designed for easy deployment and can be accessed externally u
 
 ## Folder Structure
 
+- cholesteatoma_detection_and_classification
+   - accuracy-comparison
+   - cholesteatoma
 - pharyngitis
    - pharyngitis_balanced (Dataset)
 - sinusitis_detection_and_severity_classification
@@ -77,6 +80,11 @@ https://monarch-witty-platypus.ngrok-free.app
 You can now use this public URL in your mobile app or for external testing.
 
 ## Testing the API
+### API Document  
+Test route in FastAPI Swagger UI.
+```
+curl http://127.0.0.1:4000/docs
+```
 ### END POINTS 
 Test route to check if the API server is running.
 ```
@@ -86,6 +94,11 @@ Endpoint to upload a file for sinusitis detection and severity classification.
    - File: The Water's View XRay image file for sinusitis detection.
 ```
 curl http://127.0.0.1:4000/api/sinusitis/analyze
+```
+Endpoint to upload a file for cholesteatoma detection and stages classification.
+   - File: Middle Ear Endoscopy image file for cholesteatoma detection.
+```
+curl http://127.0.0.1:4000/api/cholesteatoma/analyze
 ```
 Endpoint to upload a file for pharyngitis detection and severity classification.
 
