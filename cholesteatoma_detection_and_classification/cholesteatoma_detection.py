@@ -126,7 +126,7 @@ async def process_endoscopy_image(file):
             "isCholesteatoma": False,
             "stage": "N/A",
             "suggestions": "",
-            "confidenceScore": "N/A",
+            "confidenceScore": "0.00",
             "prediction": "N/A"
          },
          "error": str(e)
