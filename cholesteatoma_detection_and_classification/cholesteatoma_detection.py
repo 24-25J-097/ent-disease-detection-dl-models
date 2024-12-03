@@ -91,6 +91,7 @@ async def process_endoscopy_image(file):
                "success": True,
                "message": "Invalid image",
                "data": {
+                  "status": "failed",
                   "confidenceScore": float(probability),
                   "prediction": "invalid"
                }
@@ -98,6 +99,9 @@ async def process_endoscopy_image(file):
 
       # Predict stages of cholesteatoma
       class_name, confidence_score = predict_image(file_bytes)
+
+      # Check cholesteatoma by class name
+      isCholesteatoma = False if str(class_name).strip().lower() == "normal" else True
 
       logging.info("> ========== Predict stages of cholesteatoma ==========")
       logging.info("> Class: " + str(class_name))
@@ -109,7 +113,7 @@ async def process_endoscopy_image(file):
             "message": "Prediction successful",
             "data": {
                "status": "diagnosed",
-               "isCholesteatoma": True,
+               "isCholesteatoma": isCholesteatoma,
                "stage": get_descriptive_stage(class_name.strip()),
                "suggestions": get_suggestions(class_name.strip()),
                "confidenceScore": float(confidence_score),
