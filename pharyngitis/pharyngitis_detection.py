@@ -70,7 +70,7 @@ async def process_oral_image(file):
       model = load_model(model_path, compile=False)
 
       # Define the class names
-      class_names = ["normal", "moderate", "tonsillitis"]
+      class_names = ["healthy", "moderate", "tonsillitis"]
 
       # Prepare input image
       data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
@@ -90,7 +90,7 @@ async def process_oral_image(file):
          "success": True,
          "message": "success",
          "data":{
-            "isDiseased": class_name.strip() != "normal",
+            "isDiseased": class_name.strip() != "healthy",
             "prediction": class_name.strip(),
             "label": get_descriptive_title(class_name.strip()),
             "suggestions": get_suggestions(class_name.strip()),
@@ -100,7 +100,7 @@ async def process_oral_image(file):
    except Exception as e:
       return {
          "success": False,
-         "message": "success",
+         "message": "Error Happened",
          "error": str(e)
       }
 
