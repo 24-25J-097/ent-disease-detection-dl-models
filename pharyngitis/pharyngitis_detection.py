@@ -70,7 +70,7 @@ async def process_oral_image(file):
       model = load_model(model_path, compile=False)
 
       # Define the class names
-      class_names = ["healthy", "moderate", "tonsillitis"]
+      class_names = ["normal", "moderate", "tonsillitis"]
 
       # Prepare input image
       data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
@@ -90,7 +90,7 @@ async def process_oral_image(file):
          "success": True,
          "message": "success",
          "data":{
-            "isDiseased": class_name.strip() != "healthy",
+            "isDiseased": class_name.strip() != "normal",
             "prediction": class_name.strip(),
             "label": get_descriptive_title(class_name.strip()),
             "suggestions": get_suggestions(class_name.strip()),
@@ -107,7 +107,7 @@ async def process_oral_image(file):
 
 def get_descriptive_title(class_name):
       class_info = {
-         "healthy": "Healthy (No throat inflammation or symptoms)",
+         "normal": "Healthy (No throat inflammation or symptoms)",
          "moderate": "Moderate (Inflamed or red throat causing mild discomfort)",
          "tonsillitis": "Tonsillitis (A severe subtype of pharyngitis with swollen, pus-filled tonsils with white patches and high fever)"
       } 
@@ -115,7 +115,7 @@ def get_descriptive_title(class_name):
 
 def get_suggestions(class_name):
       suggestions = {
-         "healthy": "No treatment needed. Stay hydrated and maintain oral hygiene.",
+         "normal": "No treatment needed. Stay hydrated and maintain oral hygiene.",
          "moderate": "Try warm gargles or lozenges. See a doctor if it worsens.",
          "tonsillitis": "Immediate medical care needed. Antibiotics or advanced treatment may be required."
       }
