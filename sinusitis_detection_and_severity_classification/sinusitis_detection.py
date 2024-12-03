@@ -113,7 +113,7 @@ async def process_xray_image(file):
    except Exception as e:
       return {
          "success": False,
-         "message": "success",
+         "message": "Error Happened",
          "error": str(e)
       }
 

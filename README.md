@@ -9,11 +9,15 @@ The application is designed for easy deployment and can be accessed externally u
 - cholesteatoma_detection_and_classification
    - accuracy-comparison
    - cholesteatoma
+- foreign-objects
+   - lateral-classifier
+   - yolo-nas
 - pharyngitis
    - pharyngitis_balanced (Dataset)
 - sinusitis_detection_and_severity_classification
    - accuracy-comparison
    - sinusitis
+   - waters_view_validator
 
 ## Features
 
@@ -21,7 +25,6 @@ The application is designed for easy deployment and can be accessed externally u
 - **FastAPI Framework**: High-performance API for seamless integration.
 - **Ngrok Integration**: Exposes the API to be accessed from mobile or 
 
----
  
 ## Requirements
 

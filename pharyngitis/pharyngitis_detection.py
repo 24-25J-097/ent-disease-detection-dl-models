@@ -100,14 +100,14 @@ async def process_oral_image(file):
    except Exception as e:
       return {
          "success": False,
-         "message": "success",
+         "message": "Error Happened",
          "error": str(e)
       }
 
 
 def get_descriptive_title(class_name):
       class_info = {
-         "healthy": "Healthy (No throat inflammation or symptoms)",
+         "normal": "Healthy (No throat inflammation or symptoms)",
          "moderate": "Moderate (Inflamed or red throat causing mild discomfort)",
          "tonsillitis": "Tonsillitis (A severe subtype of pharyngitis with swollen, pus-filled tonsils with white patches and high fever)"
       } 
@@ -115,7 +115,7 @@ def get_descriptive_title(class_name):
 
 def get_suggestions(class_name):
       suggestions = {
-         "healthy": "No treatment needed. Stay hydrated and maintain oral hygiene.",
+         "normal": "No treatment needed. Stay hydrated and maintain oral hygiene.",
          "moderate": "Try warm gargles or lozenges. See a doctor if it worsens.",
          "tonsillitis": "Immediate medical care needed. Antibiotics or advanced treatment may be required."
       }
