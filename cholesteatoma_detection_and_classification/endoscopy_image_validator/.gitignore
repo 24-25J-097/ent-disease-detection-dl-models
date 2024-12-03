@@ -1,1 +1,4 @@
 dataset
+
+# Because size over 100 MB
+ResNet50_endoscopy_image_validator.h5

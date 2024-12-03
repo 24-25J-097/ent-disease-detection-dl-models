@@ -9,34 +9,34 @@ import logging
 # Get absolute path to model files (dynamically relative to the current file)
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# image_validator_model_path = os.path.join(current_dir, 'ResNet50_endoscopy_image_validator.h5')
+image_validator_model_path = os.path.join(current_dir, 'ResNet50_endoscopy_image_validator.h5')
 model_path = os.path.join(current_dir, 'inceptionV3.h5')
 
 # Class labels
 class_names = ["Normal", "Stage 1", "Stage 2", "Stage 3"]
 
 # Preprocess image for cholesteatoma validation
-# def preprocess_image_for_validate(file_bytes):
-#     IMG_HEIGHT, IMG_WIDTH = 224, 224
-#     img = Image.open(file_bytes).convert("RGB")
-#     img = np.array(img)
-#     if img is None:
-#         raise ValueError("Could not read image")
-#     img = cv2.resize(img, (IMG_HEIGHT, IMG_WIDTH))
-#     img = img / 255.0  # Normalize
-#     img = np.expand_dims(img, axis=0)  # Add batch dimension
-#     return img
+def preprocess_image_for_validate(file_bytes):
+    IMG_HEIGHT, IMG_WIDTH = 224, 224
+    img = Image.open(file_bytes).convert("RGB")
+    img = np.array(img)
+    if img is None:
+        raise ValueError("Could not read image")
+    img = cv2.resize(img, (IMG_HEIGHT, IMG_WIDTH))
+    img = img / 255.0  # Normalize
+    img = np.expand_dims(img, axis=0)  # Add batch dimension
+    return img
 
 # Validate image
-# def validate_image(file_bytes):
-#     try:
-#          img = preprocess_image_for_validate(file_bytes)
-#          image_validator_model = load_model(image_validator_model_path, compile=False)
-#          prediction = image_validator_model.predict(img)
-#          probability = prediction[0][0]
-#          return (True, probability) if probability > 0.5 else (False, probability)
-#     except Exception as e:
-#          raise ValueError(f"Error: {e}")
+def validate_image(file_bytes):
+    try:
+         img = preprocess_image_for_validate(file_bytes)
+         image_validator_model = load_model(image_validator_model_path, compile=False)
+         prediction = image_validator_model.predict(img)
+         probability = prediction[0][0]
+         return (True, probability) if probability > 0.5 else (False, probability)
+    except Exception as e:
+         raise ValueError(f"Error: {e}")
 
 # Preprocess image for cholesteatoma prediction
 def preprocess_image(file, target_size=(224, 224)):
@@ -84,17 +84,17 @@ def predict_image(file_bytes):
 async def process_endoscopy_image(file):
    try:
       file_bytes = io.BytesIO(await file.read())
-    #   valid, probability = validate_image(file_bytes)
+      valid, probability = validate_image(file_bytes)
 
-    #   if not valid:
-    #         return {
-    #            "success": True,
-    #            "message": "Invalid image",
-    #            "data": {
-    #               "confidenceScore": float(probability),
-    #               "prediction": "invalid"
-    #            }
-    #         }
+      if not valid:
+            return {
+               "success": True,
+               "message": "Invalid image",
+               "data": {
+                  "confidenceScore": float(probability),
+                  "prediction": "invalid"
+               }
+            }
 
       # Predict stages of cholesteatoma
       class_name, confidence_score = predict_image(file_bytes)
