@@ -21,7 +21,6 @@ The application is designed for easy deployment and can be accessed externally u
 - **FastAPI Framework**: High-performance API for seamless integration.
 - **Ngrok Integration**: Exposes the API to be accessed from mobile or 
 
----
  
 ## Requirements
 
