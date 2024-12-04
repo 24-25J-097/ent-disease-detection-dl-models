@@ -86,6 +86,11 @@ async def process_endoscopy_image(file):
       file_bytes = io.BytesIO(await file.read())
       valid, probability = validate_image(file_bytes)
 
+      logging.info("> ========== Endoscopy image validation ==========")
+      logging.info("> Validity: " + "Valid Image" if valid else "Invalid Image")
+      logging.info("> Probability: " + str(probability))
+      logging.info("> =====================================================")
+
       if not valid:
             return {
                "success": True,
