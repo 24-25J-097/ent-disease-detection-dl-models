@@ -1,5 +1,6 @@
 from fastapi import APIRouter, File, UploadFile, HTTPException
 import logging
+from foreign_objects.foreign_body_detection import detect_objects, run_inference
 from sinusitis_detection_and_severity_classification.sinusitis_detection import process_xray_image
 from cholesteatoma_detection_and_classification.cholesteatoma_detection import process_endoscopy_image
 from pharyngitis.pharyngitis_detection import process_oral_image
@@ -67,3 +68,21 @@ async def pharyngitisAPI(file: UploadFile = File(...)):
         logging.error(f"Error processing file: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
 
+@router.post("/foreign/run-inference")
+async def foreign_body_run_interface(file: UploadFile = File(...)):
+   try:
+      return await run_inference(file)
+   except Exception as e:
+        # Return error details in case of failure
+        logging.error(f"Error processing file: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
+     
+@router.post("/foreign/detect")
+async def foreign_body_detect(image: UploadFile = File(...)):
+   try:
+      return await detect_objects(image)
+   except Exception as e:
+        # Return error details in case of failure
+        logging.error(f"Error processing file: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
+     
