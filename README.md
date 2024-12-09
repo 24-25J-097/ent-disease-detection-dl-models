@@ -133,3 +133,11 @@ POST http://127.0.0.1:4000/api/foreign/run-inference
 ```
 POST http://127.0.0.1:4000/api/foreign/detect
 ```
+
+## **License**  
+
+Copyright (c) 2024 24-25J-097
+
+All rights reserved. No part of this software may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without prior written permission from the author, except for brief quotations in reviews or academic references.
+
+**Unauthorized use, modification, or distribution is strictly prohibited.**
