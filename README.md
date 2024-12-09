@@ -36,6 +36,7 @@ The application is designed for easy deployment and can be accessed externally u
   - `NumPy` (for numerical operations)
   - `Python Pillow (Imaging Library)` (for image processing)
   - `OpenCV` (for image preprocessing)
+  - `Roboflow Inference` (Inference over HTTP)
   - `Python-Multipart` (for handling file uploads)
 - **Ngrok** (Download from [ngrok.com/download](https://ngrok.com/download)).
 
@@ -54,6 +55,7 @@ pip install fastapi
 pip install uvicorn
 pip install pillow
 pip install opencv-python
+pip install inference-sdk
 pip install python-multipart
 ```
 ### Steps to Run the Application
@@ -88,28 +90,6 @@ Test route in FastAPI Swagger UI.
 ```
 curl http://127.0.0.1:4000/docs
 ```
-### END POINTS 
-Test route to check if the API server is running.
-```
-curl http://127.0.0.1:4000/api/test
-```
-Endpoint to upload a file for sinusitis detection and severity classification.
-   - File: The Water's View XRay image file for sinusitis detection.
-```
-curl http://127.0.0.1:4000/api/sinusitis/analyze
-```
-Endpoint to upload a file for cholesteatoma detection and stages classification.
-   - File: Middle Ear Endoscopy image file for cholesteatoma detection.
-```
-curl http://127.0.0.1:4000/api/cholesteatoma/analyze
-```
-Endpoint to upload a file for pharyngitis detection and severity classification.
-
-   - File: The image file for pharyngitis detection.
-```
-curl http://127.0.0.1:4000/api/pharyngitis/analyze
-```
-
 ### Health Check
 To verify the API is running, send a GET request:
 ```bash
@@ -117,4 +97,39 @@ curl http://127.0.0.1:4000/
 
 # Or use the public Ngrok URL:
 curl https://monarch-witty-platypus.ngrok-free.app/
+```
+### END POINTS 
+Test route to check if the API server is running.
+```
+GET http://127.0.0.1:4000/api/test
+```
+----
+Endpoint to upload a file for sinusitis detection and severity classification.
+   - File: The Water's View XRay image file for sinusitis detection.
+```
+POST http://127.0.0.1:4000/api/sinusitis/analyze
+```
+----
+Endpoint to upload a file for cholesteatoma detection and stages classification.
+   - File: Middle Ear Endoscopy image file for cholesteatoma detection.
+```
+POST http://127.0.0.1:4000/api/cholesteatoma/analyze
+```
+----
+Endpoint to upload a file for pharyngitis detection and severity classification.
+
+   - File: The image file for pharyngitis detection.
+```
+POST http://127.0.0.1:4000/api/pharyngitis/analyze
+```
+----
+Endpoint to upload a file for foriegn body detection in lateral neck xray.
+
+   - File: The image file for foriegn body detection.
+```
+POST http://127.0.0.1:4000/api/foreign/run-inference
+```
+   - Image: The image file for foriegn body detection.
+```
+POST http://127.0.0.1:4000/api/foreign/detect
 ```
