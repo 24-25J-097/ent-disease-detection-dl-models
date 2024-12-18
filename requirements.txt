@@ -5,4 +5,4 @@ pillow==9.2.0
 numpy==1.23.0
 opencv-python==4.6.0.66
 python-multipart
-inference-sdk=0.29.2
+inference-sdk==0.29.2
