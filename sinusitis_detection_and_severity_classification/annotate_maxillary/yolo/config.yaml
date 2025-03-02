@@ -1,9 +1,10 @@
-path: E:\SLIIT\__4th_Year\Research Project - IT4010\dev\ENT-disease-detection-dl-models\sinusitis_detection_and_severity_classification\annotate_maxillary\yolov8\dataset\detect
+path: E:\SLIIT\__4th_Year\Research Project - IT4010\dev\ENT-disease-detection-dl-models\sinusitis_detection_and_severity_classification\annotate_maxillary\yolo\dataset\detect
 train: images/train 
-val: images/val 
+val: images/validation
 test: images/test 
 
-nc: 2
+nc: 3
 names:
-  0: left
-  1: right
+  0: Healthy
+  1: Moderate
+  2: Severe
