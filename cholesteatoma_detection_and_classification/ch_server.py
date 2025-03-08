@@ -20,7 +20,7 @@ app.add_middleware(
  
 # Load the trained model
 # image_validator_model_path = 'cholesteatoma_validator.h5'
-model_path = 'inceptionV3.h5'
+model_path = 'InceptionV3_cholesteatoma_identifier_pp1.h5'
 
 # Load the model
 model = load_model(model_path, compile=False)
@@ -144,5 +144,3 @@ async def predictAPI(file: UploadFile = File(...)):
       }
    except Exception as e:
       return {"error": str(e)}
-    
- 
