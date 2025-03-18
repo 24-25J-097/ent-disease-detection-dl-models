@@ -1,4 +1,5 @@
 /__pycache__
 
-# Because size over 100 MB
+# Because size over 10 MB
 ResNet50_endoscopy_image_validator.h5
+InceptionV3_cholesteatoma_identifier_pp2.h5

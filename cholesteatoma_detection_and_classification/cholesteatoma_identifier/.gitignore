@@ -1,1 +1,4 @@
 dataset
+
+# Because size over 10 MB
+InceptionV3_cholesteatoma_identifier_pp2.h5

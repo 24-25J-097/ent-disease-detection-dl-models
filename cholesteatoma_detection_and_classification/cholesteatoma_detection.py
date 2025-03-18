@@ -11,6 +11,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 
 image_validator_model_path = os.path.join(current_dir, 'ResNet50_endoscopy_image_validator.h5')
 model_path = os.path.join(current_dir, 'InceptionV3_cholesteatoma_identifier_pp1.h5')
+# model_path = os.path.join(current_dir, 'InceptionV3_cholesteatoma_identifier_pp2.h5')
 
 # Class labels
 class_names = ["Normal", "Stage 1", "Stage 2", "Stage 3"]
