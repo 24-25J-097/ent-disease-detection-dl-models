@@ -88,11 +88,12 @@ async def process_xray_image(file):
                "success": True,
                "message": "Invalid Image",
                "data": {
+                  "status": "failed",
+                  "confidenceScore": float(probability),
+                  "prediction": "invalid",
                   "isSinusitis": False,
-                  "prediction": "invalid", 
                   "label": "Invalid Water's View X Ray",
-                  "suggestions": "Please upload valid Water's View X Ray",
-                  "confidence_score": float(probability)
+                  "suggestions": "Please upload valid Water's View X Ray"
                }
             }
 
@@ -103,19 +104,29 @@ async def process_xray_image(file):
             "success": True,
             "message": "success",
             "data": {
+               "status": "diagnosed",
                "isSinusitis": class_name.strip() != "mild",
-               "prediction": class_name.strip(),
-               "label": get_descriptive_title(class_name.strip()),
+               "severity": get_descriptive_title(class_name.strip()),
                "suggestions": get_suggestions(class_name.strip()),
-               "confidence_score": float(confidence_score)
+               "confidenceScore": float(confidence_score),
+               "prediction": "valid",
+               "predictionClass": class_name.strip()
             }
       }
    except Exception as e:
-      return {
-         "success": False,
-         "message": "Error Happened",
-         "error": str(e)
-      }
+       return {
+           "success": False,
+           "message": "Failed",
+           "data": {
+               "status": "failed",
+               "isCholesteatoma": False,
+               "stage": "N/A",
+               "suggestions": "",
+               "confidenceScore": "0.00",
+               "prediction": "N/A"
+           },
+           "error": str(e)
+       }
 
 def get_descriptive_title(class_name):
     class_info = {
