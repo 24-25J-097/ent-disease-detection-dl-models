@@ -58,11 +58,12 @@ async def process_oral_image(file):
             "success": True,
             "message": "Invalid Image",
             "data":{
-               "isDiseased": False,
+               "status": "failed",
+               "confidenceScore": float(probability),
                "prediction": "invalid",
+               "isPharyngitis": False,
                "label": "Invalid Oral Image",
-               "suggestions": "Please upload valid Oral Image",
-               "confidence_score": float(probability)  
+               "suggestions": "Please upload valid Oral Image"
             }
          }
          
@@ -90,19 +91,29 @@ async def process_oral_image(file):
          "success": True,
          "message": "success",
          "data":{
-            "isDiseased": class_name.strip() != "normal",
-            "prediction": class_name.strip(),
-            "label": get_descriptive_title(class_name.strip()),
+            "status": "diagnosed",
+            "isPharyngitis": class_name.strip() != "normal",
+            "stage": get_descriptive_title(class_name.strip()),
             "suggestions": get_suggestions(class_name.strip()),
-            "confidence_score": float(confidence_score)  
+            "confidenceScore": float(confidence_score),
+            "prediction": "valid",
+            "predictionClass": class_name.strip()
          }
       }
    except Exception as e:
-      return {
-         "success": False,
-         "message": "Error Happened",
-         "error": str(e)
-      }
+       return {
+           "success": False,
+           "message": "Failed",
+           "data": {
+               "status": "failed",
+               "isPharyngitis": False,
+               "stage": "N/A",
+               "suggestions": "",
+               "confidenceScore": "0.00",
+               "prediction": "N/A"
+           },
+           "error": str(e)
+       }
 
 
 def get_descriptive_title(class_name):
