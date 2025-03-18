@@ -119,7 +119,7 @@ async def process_xray_image(file):
            "message": "Failed",
            "data": {
                "status": "failed",
-               "isCholesteatoma": False,
+               "isSinusitis": False,
                "stage": "N/A",
                "suggestions": "",
                "confidenceScore": "0.00",
