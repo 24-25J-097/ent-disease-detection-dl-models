@@ -1,1 +1,3 @@
 /__pycache__
+/annotate_maxillary/yolo/dataset
+/annotate_maxillary/yolo/runs/detect/train6/weights
