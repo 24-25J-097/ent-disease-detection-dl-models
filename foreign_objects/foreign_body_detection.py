@@ -9,7 +9,7 @@ import io
 # Initialize the inference client for Roboflow
 CLIENT = InferenceHTTPClient(
     api_url="https://detect.roboflow.com",
-    api_key=""
+    api_key="dZvN0FZAZF3VuaVNLn2R"
 )
 
 # Default values for Ultralytics API
@@ -18,7 +18,7 @@ DEFAULT_IMGSZ = 640
 DEFAULT_CONF = 0.25
 DEFAULT_IOU = 0.45
 API_URL = "https://predict.ultralytics.com"
-API_KEY = ""
+API_KEY = "15006b56cd8ef5e110058e45f8a92a9ef9664cc5ce"
  
 async def detect_objects(image):
     """Perform object detection using Roboflow."""
