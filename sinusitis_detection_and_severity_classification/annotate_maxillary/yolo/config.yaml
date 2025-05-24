@@ -1,0 +1,26 @@
+path: E:\SLIIT\__4th_Year\Research Project - IT4010\dev\ENT-disease-detection-dl-models\sinusitis_detection_and_severity_classification\annotate_maxillary\yolo\dataset\detect
+train: images/train 
+val: images/validation
+test: images/test 
+
+nc: 3
+names:
+  0: Healthy
+  1: Moderate
+  2: Severe
+#augment:
+#  hflip: 0.5
+#  vflip: 0.5
+#  rotate: 10
+#  scale: [0.8, 1.2]
+#  translate: [0.1, 0.1]
+#  shear: [5, 5]
+#  color_jitter: [0.2, 0.2, 0.2, 0.1]
+augment:
+    hsv_h: 0.1
+    hsv_s: 0.3
+    hsv_v: 0.3
+    flipud: 0.1
+    shear: 0.1
+    degrees: 10
+    mixup: 0.3  # Mixup images to reduce overfitting
