@@ -8,3 +8,11 @@ names:
   0: Healthy
   1: Moderate
   2: Severe
+augment:
+  hflip: 0.5
+  vflip: 0.5
+  rotate: 10
+  scale: [0.8, 1.2]
+  translate: [0.1, 0.1]
+  shear: [5, 5]
+  color_jitter: [0.2, 0.2, 0.2, 0.1]
